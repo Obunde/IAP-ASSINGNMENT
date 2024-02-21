@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Manager</title>
+</head>
+<body>
+
+<input type="text" id="taskInput">
+<button id="submitButton" disabled>Add Task</button>
+
+<ul id="taskList"></ul>
+
+<script>
+window.onload = function() {
+    var tasks = [];
+
+    let taskInput = document.getElementById("taskInput");
+    let submitButton = document.getElementById("submitButton");
+
+    function addTask() {
+        let taskValue = taskInput.value.trim();
+        if (taskValue !== '') {
+            let taskObject = {
+                taskItem: taskValue
+            };
+            tasks.push(taskObject);
+            console.log(tasks);
+
+            var ul = document.getElementById('taskList');
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(taskValue));
+            ul.appendChild(li);
+
+            taskInput.value = '';
+            submitButton.disabled = true;
+        }
+    }
+
+    function enableButton() {
+        submitButton.disabled = false;
+    }
+
+    submitButton.addEventListener("click", addTask);
+    taskInput.addEventListener("input", enableButton);
+};
+</script>
+
+</body>
+</html>
